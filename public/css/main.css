@@ -1,7 +1,7 @@
 body {
-  margin: 0;
   font-family: Arial, "MS Trebuchet", sans-serif;
-  background-image: url('./../images/seahawks.jpg')
+  background-image: url('./../images/seahawks.jpg');
+  margin: 0;
 }
 
 #header {
@@ -42,12 +42,26 @@ body {
   padding-top: 50px;
   height: 100%;
   width: 55px;
-
 }
 
 .social img {
   display: block;
   padding-top: 30px;
+  opacity: .5;
+}
+
+.social img:hover {
+  opacity: 1;
+}
+
+.bottom img {
+  display: block;
+  margin: auto;
+  opacity: 0;
+}
+
+.bottom img:hover {
+  opacity: .5;
 }
 
 footer {
@@ -65,7 +79,7 @@ footer a {
 }
 
 footer a:hover {
-
+  color: ;
 }
 
 footer a:visited {
