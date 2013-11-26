@@ -1,5 +1,6 @@
+
 body {
-  font-family: Arial, "MS Trebuchet", sans-serif;
+  font-family: Avenir, "MS Trebuchet", sans-serif;
   background-image: url('./../images/seahawks.jpg');
   margin: 0;
 }
@@ -10,25 +11,31 @@ body {
   background-color: #C9C9C9;  
   position:fixed; 
   top:0;
-  horizontal-align: center;
+  text-align: center;
+  z-index: 1;
 }
 
-#header img {
+h1 {
+  font-size: 60px;
+  margin: 0;
+}
+/*#header img {
   display: block;
   margin-left:auto;
   margin-right:auto;
-}
+}*/
 
 .container {
   width: 700px;
   margin: 0 auto;
+  text-align: center;
   padding-top: 100px;
 }
 
 .content {
   width: 500px;
   margin: 150px 100px;
-  font-family: Arial, "MS Trebuchet", sans-serif;
+  font-family: Avenir, "MS Trebuchet", sans-serif;
   font-size: 20px;
 }
 
@@ -69,9 +76,9 @@ footer {
   background-color: #C9C9C9;
   height: 20px;
   bottom: 0;
-  padding: 5px 10px;
   border-top: 2px solid grey;
   width: 100%;
+  padding: 5px 5px;
 }
 
 footer a {
@@ -79,9 +86,34 @@ footer a {
 }
 
 footer a:hover {
-  color: ;
+  color: #6F0564;
 }
 
 footer a:visited {
-  color: #EFD3E7;
+  text-decoration: none;
 }
+
+
+@media screen and (max-width: 800px) {
+    .content { 
+      width: 500px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    h1 {
+      font-size: 50px
+    }
+    .content { 
+      width: 200px;
+      margin-top: 30px;
+    }
+    .container {
+      width: 600px;
+    }
+  }
+
+@media screen and (max-width: 400px) {
+  .container {
+    width: 400px;
+  }
