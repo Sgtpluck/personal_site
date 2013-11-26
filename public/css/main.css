@@ -1,0 +1,73 @@
+body {
+  margin: 0;
+  font-family: Arial, "MS Trebuchet", sans-serif;
+  background-image: url('./../images/seahawks.jpg')
+}
+
+#header {
+  border-bottom: 2px solid grey;
+  width: 100%;
+  background-color: #C9C9C9;  
+  position:fixed; 
+  top:0;
+  horizontal-align: center;
+}
+
+#header img {
+  display: block;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.container {
+  width: 700px;
+  margin: 0 auto;
+  padding-top: 100px;
+}
+
+.content {
+  width: 500px;
+  margin: 150px 100px;
+  font-family: Arial, "MS Trebuchet", sans-serif;
+  font-size: 20px;
+}
+
+.form {
+  width: 200px
+}
+
+.social {
+  position: fixed;
+  left:0;
+  padding-top: 50px;
+  height: 100%;
+  width: 55px;
+
+}
+
+.social img {
+  display: block;
+  padding-top: 30px;
+}
+
+footer {
+  position:fixed; 
+  background-color: #C9C9C9;
+  height: 20px;
+  bottom: 0;
+  padding: 5px 10px;
+  border-top: 2px solid grey;
+  width: 100%;
+}
+
+footer a {
+  color: #ad235e;
+}
+
+footer a:hover {
+
+}
+
+footer a:visited {
+  color: #EFD3E7;
+}
