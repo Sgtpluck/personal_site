@@ -125,6 +125,14 @@ footer a:visited {
   }
 
 @media screen and (max-width: 400px) {
+
+  h1 {
+    font-size:40;
+  }
   .container {
     width: 400px;
+  }
+
+  .social {
+    padding-top: 5px;
   }
