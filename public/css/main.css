@@ -1,7 +1,7 @@
 
 body {
   font-family: Avenir, "MS Trebuchet", sans-serif;
-  background-image: url('./../images/seahawks.jpg');
+  background-image: url('./../img/seahawks.jpg');
   margin: 0;
 }
 
@@ -37,6 +37,14 @@ h1 {
   margin: 150px 100px;
   font-family: Avenir, "MS Trebuchet", sans-serif;
   font-size: 20px;
+}
+
+.content a {
+color: #ad235e;
+}
+
+.content a:hover {
+  color: #6F0564;
 }
 
 .form {
@@ -93,6 +101,9 @@ footer a:visited {
   text-decoration: none;
 }
 
+/*@media screen and (max-width: 1000px) {
+    .content { width: 100% }
+}*/
 
 @media screen and (max-width: 800px) {
     .content { 
