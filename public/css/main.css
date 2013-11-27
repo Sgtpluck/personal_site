@@ -56,7 +56,7 @@ color: #ad235e;
   left:0;
   padding-top: 50px;
   height: 100%;
-  width: 55px;
+  width: 55px;  
 }
 
 .social img {
@@ -77,6 +77,10 @@ color: #ad235e;
 
 .bottom img:hover {
   opacity: .5;
+}
+
+.container ul {
+  text-align: left;
 }
 
 footer {
