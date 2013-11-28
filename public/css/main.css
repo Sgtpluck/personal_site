@@ -1,8 +1,8 @@
 
 body {
   font-family: Avenir, "MS Trebuchet", sans-serif;
-  background-image: url('./../img/seahawks.jpg');
   margin: 0;
+  background-image: url('./../img/seahawks.jpg');
 }
 
 #header {
@@ -19,11 +19,14 @@ h1 {
   font-size: 60px;
   margin: 0;
 }
-/*#header img {
-  display: block;
-  margin-left:auto;
-  margin-right:auto;
-}*/
+
+a {
+color: #ad235e;
+}
+
+a:hover {
+  color: #6F0564;
+}
 
 .container {
   width: 700px;
@@ -40,13 +43,6 @@ h1 {
   font-size: 20px;
 }
 
-.content a {
-color: #ad235e;
-}
-
-.content a:hover {
-  color: #6F0564;
-}
 
 .form {
   width: 200px
@@ -94,21 +90,13 @@ footer {
   padding: 5px 5px;
 }
 
-footer a {
-  color: #ad235e;
+.posts {
+  text-align: left;
 }
 
-footer a:hover {
-  color: #6F0564;
+.posts h4 {
+  font-size: 20px;
 }
-
-footer a:visited {
-  text-decoration: none;
-}
-
-/*@media screen and (max-width: 1000px) {
-    .content { width: 100% }
-}*/
 
 @media screen and (max-width: 800px) {
     .content { 

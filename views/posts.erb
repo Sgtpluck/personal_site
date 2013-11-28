@@ -1,3 +1,8 @@
-<% @posts.each do |post| %>
-      <a href="/posts/<%=post %>" ><%= post %></a><br><br>
-    <% end %>
+
+<div class='posts'>
+<% @sorted_posts.each do |post, data_array| %>
+      <a href="/posts/<%= post %>" > <h3> <%= data_array["title"] %> </h3></a>
+        <p><%= data_array["snippet"] %></p>
+    <% end %><br><br>
+
+  </div>
