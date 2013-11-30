@@ -6,19 +6,27 @@
     <link href="/css/main.css" media="all" rel="stylesheet">
     <link href="css/lightbox.css" rel="stylesheet" />
       <title>It's Nice To See You, Too.</title>
-    </head>
+  </head>
+
   <body>
     <div id='header'>
-      <h1>Davida Marion</h1>
+    <h1><a href='/'><img src='../img/home.jpg'></a>Davida Marion</h1>
     </div>
+
+    <div class='social'>
+      <a href='http://www.linkedin.com/in/davidamarion/'> <img alt="LinkedIn link" src='../img/linkedin.png'></a>
+      <a href='https://twitter.com/DavidaMarion'> <img alt="twittier link"  src='../img/twitter.png'></a>
+      <a href='https://github.com/Sgtpluck'><img alt="github link" src='../img/github.png'></a>
+      <a href='mailto:davidamarion@gmail.com'><img alt="Gmail link" src='../img/gmail.png'></a>      
+    </div> <!--social -->  
 
     <div role="main" class='container'>
     
       <%= yield %> <!-- this is the magic code to make the content go --> 
    
     </div>
+  </body>
     <footer>
     <a href="http://amigoingtodie.org/">Are you going to die?</a>
     </footer>
-  </body>
 </html>
