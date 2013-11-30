@@ -22,6 +22,7 @@ class MyApp < Sinatra::Base
 
     get '/posts/:post_name' do
       page = erb("/posts/#{params[:post_name]}".to_sym, layout: false).split("\n\n",2).last
+      erb :posts
       erb page
     end
 
