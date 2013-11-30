@@ -35,8 +35,7 @@ class MyApp < Sinatra::Base
           data = YAML.load(html.split("\n\n",2).first)
           @meta_data[post] = data
         end
-      end
-      puts @meta_data.inspect
+      end      
       @meta_data
     end
 
