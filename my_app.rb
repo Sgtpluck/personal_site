@@ -9,7 +9,7 @@ class MyApp < Sinatra::Base
       @posts = Dir.glob("views/posts/*.erb").map do |post_name|
         post_name.split("/").last.split(".").first
       end
-      @sorted_posts = meta_data.sort_by {|post, date_hash| date_hash["date"] }.reverse
+      @sorted_posts = meta_data.sort_by {|post, data_hash| data_hash["date"] }.reverse
     end
 
     get '/' do
@@ -17,12 +17,12 @@ class MyApp < Sinatra::Base
     end
 
     get '/posts/' do
-      erb :posts
+      erb :posts, :layout => :pages
     end
 
     get '/posts/:post_name' do
       page = erb("/posts/#{params[:post_name]}".to_sym, layout: false).split("\n\n",2).last
-      erb page
+      erb page, :layout => :pages
     end
 
     def meta_data

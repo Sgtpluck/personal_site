@@ -1,7 +1,14 @@
 body {
   font-family: Avenir, "MS Trebuchet", sans-serif;
   margin: 0;
+}
+
+.index {
   background-image: url('./../img/seahawks.jpg');
+}
+
+.posts {
+
 }
 
 #header {
@@ -51,6 +58,11 @@ a:hover {
   margin: 150px 100px;
   font-family: Avenir, "MS Trebuchet", sans-serif;
   font-size: 20px;
+}
+
+.blog_content {
+  padding: 100px;
+  width: auto;
 }
 
 
