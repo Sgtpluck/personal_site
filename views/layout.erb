@@ -10,7 +10,7 @@
 
   <body class='index'>
     <div id='header'>
-    <h1><a href='/'><img src='../img/home.jpg'></a>Davida Marion</h1>
+      <h1><a href='/'><img src='../img/home.jpg'></a><%= locals[:title] %></h1>
     </div>
 
     <div class='social'>
@@ -20,13 +20,13 @@
       <a href='mailto:davidamarion@gmail.com'><img alt="Gmail link" src='../img/gmail.png'></a>      
     </div> <!--social -->  
 
-    <div role="main" class='container'>
+    <div role='main' class='container'>
     
       <%= yield %> <!-- this is the magic code to make the content go --> 
    
     </div>
   </body>
     <footer>
-    <a href="http://amigoingtodie.org/">Are you going to die?</a>
+      <a href="http://amigoingtodie.org/">Are you going to die?</a>
     </footer>
 </html>

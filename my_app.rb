@@ -13,16 +13,16 @@ class MyApp < Sinatra::Base
     end
 
     get '/' do
-      erb :index
+      erb :index, :locals=> {:title => "Davida Marion."}
     end
 
     get '/posts/' do
-      erb :posts, :layout => :pages
+      erb :posts, :layout => :pages, :locals=> {:title => "This. Is. Serious."}
     end
 
     get '/posts/:post_name' do
       page = erb("/posts/#{params[:post_name]}".to_sym, layout: false).split("\n\n",2).last
-      erb page, :layout => :pages
+      erb page, :layout => :pages, :locals=> {:anchor=> "<a href='./'>Go Back</a>"}
     end
 
     def meta_data
