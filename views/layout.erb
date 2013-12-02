@@ -8,7 +8,7 @@
       <title>It's Nice To See You, Too.</title>
   </head>
 
-  <body class='index'>
+  <body class=<%= locals[:body] %>>
     <div id='header'>
       <h1><a href='/'><img src='../img/home.jpg'></a><%= locals[:title] %></h1>
     </div>
@@ -20,10 +20,10 @@
       <a href='mailto:davidamarion@gmail.com'><img alt="Gmail link" src='../img/gmail.png'></a>      
     </div> <!--social -->  
 
-    <div role='main' class='container'>
+    <div role='main' class=<%= locals[:content] %>>
     
       <%= yield %> <!-- this is the magic code to make the content go --> 
-   
+      <%= locals[:anchor] %>
     </div>
   </body>
     <footer>
