@@ -1,0 +1,58 @@
+title: Scamazon Searching
+date: 12-15-2013
+snippet: In which I explain a solution to a problem!
+
+<h2> Searchin' For Somethin'? I Got It Right Here </h2>
+
+<p>This week, I spent a big chunk of time trying to work out how exactly to get a "filter by category" method work. In the beginning of the week, we were told that our two-week long project, code-named 'Congo', is a fake Amazon-type store, in which we can have vendors and buyers, and they can choose products and put them in a cart, and the checkout, with authentic credit-card numbers and everthing. With that kind of directions, I announced to my group that my vote was to call the project Scamazon, and then I dropped the mic and walked out of the classroom. </p>
+
+<p>No, of course I didn't. Instead I spent much of the week building the products resource, adding an image uploader, and trying to make sure everything was as easy and intuitive as possible. And towards the end of the week, I ran into my biggest challenge to date: writing a method that can not only filter by categories, but that filters by MULTIPLE categories. IE, one can choose a couple of check boxes and then hit submit.</p>
+<img src='./../img/filter.jpg' alt='Go on and filter that!'>
+
+<p> First,  I had to make a checkbox list of all the categories that we had. Since that resource is dynamic -- any authorized user can create one -- it had to also be a dynamic list. In order to keep the index.html.erb view of the products, I made a separate partial file with the category block. (Later, when I added the ability to search by sellers, I just added that to the _filters.html.erb partial.) That was easy enough to accomplish, using the .each method on the Category.all method. (I have removed the ruby openeing and closing tags for clarity.)</p>
+
+  <blockquote> form_tag(products_path, method: :get)<br>
+    &nbsp; Category.all.each do |category|<br>
+    &nbsp; &nbsp; &nbsp; label_tag category.category<br>
+    &nbsp; &nbsp; &nbsp; check_box_tag(:"category_ids[]", category.id) <br>
+    &nbsp; end <br>
+  submit_tag 'Filter by categories'<br>
+</blockquote>
+
+<p> The submit_tag is outside the all.each block to make sure there's not a billion submit buttons. You may also notice that I didn't just made the name of the check_box_tag :category_filter; oh no. Since the checkbox will be next to every single category, if the name is simply a symbol, then if you clicked on multiple checkboxes, the very last category to be selected would overwite the other values, since the hash wouldn't know it should be added to an array. So the only category that would be the value of the key :category_filter would be the very last category selected. Declaring category_filter as an array makes it possible to add multiple values. </p>
+<p> The other thing you may notice about the check_box options is that the value of the check is not true/false or 1/0, but category.ids. That means that the actual id of the block variable category is being passed in as the key; that way, when we query the database, it will have an actual value to search for. </p>
+<p> So: the checkbox is made. But unfortunately, it's still not ... doing anything, besides being pretty. (Note: It's not that pretty.) So now I had to actually make some magic happen. Since the form is just submitting back to the products index, I had to rewrite the index method to incorporate the filter.</p>
+
+<blockquote>  def index<br>
+    &nbsp; &nbsp; &nbsp; @products = Product.filter(params[:category_ids])<br>
+  end
+</blockquote>
+
+<p> This method, which is defining @products (used by index.html.erb to display all the relevent products), calls a class method self.filter; that can be found in the model, product.rb. Since I was planning on using the ability to filter by the category
+in multiple ways, I made a scope method to keep everything DRY. <p>
+
+<blockquote>
+   scope :by_category, lambda {|ids| includes(:categories).where(categories: {id: ids}) }
+ </blockquote>
+
+<p> Basically, the scope part is just making this method, which is called by_category, available throughout the Product class. The rest of the method is a fairly straightforward ActiveRecord search; the method is expecting an array of ids, and for each of them, it queries the product table for products where the category id attribue is the same as input. If there's only one object in the array, it will return only one category; if there's two, then two, and so on.</p>
+
+<p> Finally, I wrote the actual self.filter method. (Believe me, I'm trying to keep this short!</p>
+
+<blockquote>
+  def self.filter(category=nil)
+   &nbsp &nbsp  if category
+    &nbsp &nbsp &nbsp &nbsp   by_category(category)
+    &nbsp &nbsp else
+    &nbsp &nbsp &nbsp &nbsp   where(retired: false)
+    &nbsp &nbsp end
+  end</blockquote>
+
+<p> Remember the products controller index method? It's always calling this method whenever you go to the index page. So I had to set it up so that it knew what to do if the user wasn't trying to filter by anything. That's where that if/else clause comes in; if there isn't a category argument, it will just got down to the else clause, and assign <strong>all</strong> products that are not retired to the @products variable.</p>
+
+<p>If have checked a category, it will access the by_category method, and input the category_ids[]. The scope method goes through all of the ids, and returns the products with those ids, which are then assigned into the @products variable.</p>
+
+<p>Finally, the @products varible is ready to be accessed from the index page, where all the products that fit the parameters will be displayed with a .each method. Tadah! I would go into more details about how we then added the seller and search filters, but unfortunately this is the longest blog post in the world and you've probably fallen asleep already.</p>
+
+
+
