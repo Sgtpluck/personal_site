@@ -1,0 +1,36 @@
+title: Helping Everyone Get Help
+date: 12-15-2013
+snippet: Solving a real-life problem with technology.
+
+<h2> Helping Everyone Get Help </h2>
+
+<p> Since I've been a student at the Ada Developers Academy, I've noticed a significant problem in the way we allocated a specific resource: TAs and instructor help. For the first two months of class, whenever we've needed help, we've either raised our hands or gotten out of our seats, walked over to the white board, and written our names in a list. This is an okay solution, but there are some major flaws with it.</p>
+
+  <ol>
+    <li>TAs and students sometimes don't notice who has their hands raised first, thus leading to someone getting jumped in line. 
+    </li>
+    <li>People don't erase their names, thus leading to situations where someone gets helped multiple times before someone else, further down the list, gets helped. 
+    </li>
+    <li>You have to get out of your seat to write your name on the board. <em> I hate getting out of my seat. </em>
+    </li>
+  </ol>
+
+<p>The first month of class, I was sure there was a way to do things better, but I just wasn't sure <em>how</em>. But since we've started learning Ruby on Rails, I've thought to myself -- this! This is how! So over the course of a weekend I, along with my classmate Hsing-Hui, put together (in my humble, completely unbiased opinion) a pretty nifty little app that helps solve this problem, and hopefully can, long-term, lead to our optimizing our precious instructor/TA time.</p>
+
+<p> The basic idea behind the app is a list of people who need help, along with the type of help, a brief outline of the problem, and an estimate of how long the problem will take to be answered. That kind of transparency allows people waiting in line can have an idea of how long they might be waiting; but also, can help incentivize us helping each other. If I'm at the bottom of the list, and I see that someone ahead of me has a problem that I know how to solve, I can go help them, and get TA help that much faster. If you post a problem, a button indicating that you've been helped pops up; only you can press that button, and it will make your problem disappear from the help list. (Importantly, it does not destroy the problem; I'd like to eventually do analysis on them, and maybe even turn some of the more common problems into potential help references.)</p>
+
+<p> Hsing-Hui and I implemented a bunch of features, and came up with some ideas for other ones, but the feature I'm currently most proud of is the integration of our app with our Campfire chatroom. Using the <a href='https://github.com/collectiveidea/tinder'> Tinder and the <a href='https://github.com/laserlemon/figaro'>Figaro</a> gem (and the <a href='https://github.com/kerrizor/campfire-notices'>small but useful app</a> of one of our fearless leaders, <a href='https://github.com/kerrizor'>Kerri</a>), I figured out how to connect the app so that, when an Adie posts a problem, a Campfire bot announces it into our chat. That way, anyone connected to the Campfire can see that someone needs help. (And it means we don't need to create a bunch of log-ins for TAs.)</p>
+
+<h3>Incorporating Tinder </h3>
+
+<p> At first blush, using Tinder seemed like a magical, impossible thing. How could my app possibly "talk" into our chatroom? And now that I've implemented it, it still seems mostly magic, but at least I can make it work!</p>
+
+<p> Basically, it seems like the magic of Tinder is that you can assign it to a specific Campfire room, and give it an authentication token, and then it can use the method 'Speak' to send a message into the chat. Kerri's application simply transmitted any message that a user typed into a text field; the help-list automatically creates a problem message that includes all the pertinent problem information. I am still deciding if we should autopopulate the "Helped" state into the chat; although, I think there's still a lot of improvements to be made to the help list.</p>
+
+<h3> Features To Come! </h3>
+
+<p> Other things I want to do include a "Being Helped" button so that we can track the amount of time that passes as someone is being helped. Sometimes, another pair of eyes are needed on a problem, and that would be a good way to make sure an Adie's problem could be fixed in a timely fashion. (And keep everyone's frustrations to a minimum.) In a similar vein, I think it would be useful to have a timer to see how long everyone has been waiting. I also think it might be good to add a text column in the problem database in which an Adie could describe the things she's already done to solve the problem; sometimes, just walking through those kinds of things can help you solve things for yourself.</p>
+
+<p>The other potential feature that I think could be really useful is allowing Adies to potentially rate the help received, as well as give a brief explanation of the solution. (Assuming that's possible!) We could basically create our own little stackoverflow, which would be uniquely attuned to the problems of incoming Adies.</p>
+
+<p> If you're interested in the code (there's no point in linking to the actual app, since you can't see any of it unless you're signed in as an Adie!), check out my <a href='https://github.com/Sgtpluck/wait_list'>github repo!</a></p>
