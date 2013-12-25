@@ -40,12 +40,12 @@ in multiple ways, I made a scope method to keep everything DRY. <p>
 <p> Finally, I wrote the actual self.filter method. (Believe me, I'm trying to keep this short!</p>
 
 <blockquote>
-  def self.filter(category=nil)
-   &nbsp &nbsp  if category
-    &nbsp &nbsp &nbsp &nbsp   by_category(category)
-    &nbsp &nbsp else
-    &nbsp &nbsp &nbsp &nbsp   where(retired: false)
-    &nbsp &nbsp end
+  def self.filter(category=nil)<br>
+   &nbsp &nbsp  if category<br>
+    &nbsp &nbsp &nbsp &nbsp   by_category(category)<br>
+    &nbsp &nbsp else<br>
+    &nbsp &nbsp &nbsp &nbsp   where(retired: false)<br>
+    &nbsp &nbsp end<br>
   end</blockquote>
 
 <p> Remember the products controller index method? It's always calling this method whenever you go to the index page. So I had to set it up so that it knew what to do if the user wasn't trying to filter by anything. That's where that if/else clause comes in; if there isn't a category argument, it will just got down to the else clause, and assign <strong>all</strong> products that are not retired to the @products variable.</p>
@@ -54,6 +54,6 @@ in multiple ways, I made a scope method to keep everything DRY. <p>
 
 <p>Finally, the @products varible is ready to be accessed from the index page, where all the products that fit the parameters will be displayed with a .each method. Tadah! I would go into more details about how we then added the seller and search filters, but unfortunately this is the longest blog post in the world and you've probably fallen asleep already.</p>
 
-<p> Update!<br> Scamazon is complete (more or less!) and available on the internet. <a href="http://scamazon.herokuapp.com">Check it out!</a></p>
+<p> Update!<br> Scamazon is complete (more or less!) and available on the internet. <a href="http://scamazon.herokuapp.com">Check it out!</a></p><br>
 
 
