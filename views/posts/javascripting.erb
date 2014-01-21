@@ -1,0 +1,41 @@
+title: Now You See It, Now You Don't
+date: 01-20-2014
+snippet: JavaScripting Up A Storm
+
+<h2> Dynamic Forms </h2>
+
+Last week we tasked ourselves with an enormous assignment: the learning of JavaScript. Well, obviously we didn't really expect to learn *all* of JavaScript in a mere five days, but learning some of the fundementals. It was a difficult and often frustrating week, but with the help of our trusty volunteer <a href='http://www.jefflembeck.com/'>Jeff Lembeck</a>, we managed to navigate through a lot of common JavaScript pitfalls.
+<br><br>
+So, ambitiously, I thought I would attempt to add some JavaScript to an existing project. I've been wanting to add a ratings form to the <a href='http://davida-sinatra.herokuapp.com/posts/solving_problems'>help-list</a> so that we Adies could assess the help we've been given, as well as potentially provide solutions that other Adies could peruse. Basically, long-term, the idea is to create a mini, Ada-specific stack overflow, which could be a resource that the program could use for future cohorts, who will probably struggle with similar problems. (Ratings might also encourage us to write out the solutions to our problems, therefore cementing it in our brains.)
+<br><br>
+So I created show pages for each of the problems, in which, if you're the Adie who created that problem, you can rate your solution. But herein lies the JavaScript; I didn't want to make the form visible until you clicked the "Rate Solution" button.<br><br>
+<img src='../img/rate_pic.png', alt='The Problem page with the Rating Button'>
+<br><br>
+We learned how to do something similar last week with Jeff; we walked us through adding a div element and making it turn green if we clicked on the text. I figured I could write a similar function in order to make another div element change its visibility when a div element on the page, styled to look like a button, was clicked. I gave the element wrapping the button the id of 'rating_button', and the form itself was given a class of hidden_form. I also set the CSS of the hidden_form to start with the initial visibility of 'hidden.'
+<br><br>
+And then I wrote the JavaScript:<br>
+<blockquote>
+  <code>
+    document.addEventListener( "DOMContentLoaded", function( e ) {<br>
+    &nbsp; var rating = document.querySelector('#rating_button'),<br>
+    &nbsp; &nbsp; &nbsp; hidden = document.querySelector('.hidden_form');<br>
+    &nbsp; var style = hidden.style,<br>
+    &nbsp; &nbsp; &nbsp; rate_style = rating.style;<br>
+    &nbsp; rating.addEventListener('click', function( event ){<br>
+    &nbsp; &nbsp; style.visibility = 'visible';<br>
+    &nbsp; &nbsp; rate_style.visibility = 'hidden';<br>
+  &nbsp;});<br>
+} );
+
+  </code>
+</blockquote>
+<br>
+Basically, what this code is doing is it's creating a variable that is 'rating', selecting the element with the rating_button id, as well as a 'hidden' variable that is selecting the element with the class of 'hidden_form.' Using those two variables, I also set two variables that can be used to style those two elements.
+<br><br>
+The rating.addEventListener bit is adding the actual click event; once the Adie clicks on the rating element, the visibility of the hidden form switches from hidden to 'visible.' As an extra little kick, the style of the button changes from visible to hidden, making the button disappear.
+<br><br>
+<img src='../img/form.png', alt='The Problem page with the form exposed'>
+<br><br>
+Eh? Eh? It's just a little thing, but I was thrilled to be able to apply the lessons we learned last week so quickly. Thanks, Jeff!
+<br><br>
+
