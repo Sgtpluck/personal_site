@@ -1,0 +1,43 @@
+title: One Gem For Them All
+snippet: Gobblin' up RSS and spitting out posts.
+date: 01-27-2014
+
+<h2>Feedzirra ... On The Attack </h2>
+<br><br>
+We Adies are currently working on a pretty cool project; a personal feed site where a user can store all the feeds they want, even if it's a personal twitter stream. When we were dividing up the different tasks, the strict Scrum Master <a href='https://twitter.com/bookis'>Bookis Smuin</a> assigned me with a terrible task; installing bootstrap and coming up with a basic design for the site. Not having the most design-oriented brain, I took a day and cobbled something together that is, if not 'nice', at least presentable. By the time I deployed the design to Heroku, my loyal teammates Whitney and Elizabeth were both chugging along, figuring out the tumblr and twitter APIs. That left me with ... the RSS feeds.
+<br><br>
+Initially, I was very intimidated by the thought of parsing different types of feeds, especially since the story actually read, 'User Can Add RSS/ATOM/XML Feed'. I didn't even know what ATOM meant, to be honest. (After some research, I can tell you it's the much-less-scary sounding XML syndication language for RSS feeds, which makes them easier, not more difficult to parse.) I used the gem HTTParty to submit HTTP get requests on a couple different RSS feeds, and drilled down into the hash, taking some notes about how they presented different types of information, and thought about how to grab all that information and transform them into feeds and posts. And then I thought to myself, 'I bet someone has solved this problem before.'
+<br><br>
+And, it turns out, someone has, in a really awesome way. After some searching around on the Internet, I stumbled across the <a href='https://github.com/pauldix/feedzirra'>Feedzirra</a> gem,  created by <a href='http://www.pauldix.net/'>Paul Dix</a>, a cool dude who wanted me to be able to parse feeds quickly and consistently. Feedzirra, which has really incredible documentation, fetches and parses the RSS feed and packages it into a hash that is instantly usable. Pretty sweet, right?
+<br><br>
+So using the built-in fetch_and_parse method, the general 'search for RSS feeds' method ends up lookin like this:<br><br>
+<blockquote>
+  def self.search(feed_search)<br>
+    &nbsp; &nbsp; Feedzirra::Feed.fetch_and_parse(feed_search)<br>
+  end<br>
+</blockquote>
+<br><br>
+Look at show simple that is! Of course, finding and adding the feeds is a slightly more complex task within the course of navigating the appliation; first, you have to input the feed's URL, on the User's show page, which is interpreted with the show command every time you reload the home page. The relevant piece of code:
+<br><br>
+<blockquote>
+def show<br>
+  &nbsp; &nbsp; @search = Post.search_bar(params[:feeder_params],params[:twitter_params], params[:search_tumblr])<br>
+end<br>
+</blockquote>
+So once you input the url into the appropriate search bar (we're refactoring them down to one, but that's a future task), you search for the feed, and the feeder_params gets fed into the above show method. This passes the params as an argument along to the Post model, in a method called self.search_bar. That code looks like this:
+<br><br>
+<blockquote>
+def self.search_bar(feed_search=nil,twitter_search=nil, search_tumblr=nil)<br>
+    &nbsp; &nbsp; if feed_search<br>
+      &nbsp; &nbsp; &nbsp; &nbsp; Feeder.search(feed_search)<br>
+    &nbsp; &nbsp; elsif search_tumblr<br>
+      &nbsp; &nbsp; &nbsp; &nbsp; Tumblr.search(search_tumblr)<br>
+    &nbsp; &nbsp; elsif twitter_search<br>
+      &nbsp; &nbsp; &nbsp; &nbsp; TwitterFeed.search(twitter_search)<br>
+    &nbsp; &nbsp; end<br>
+  end<br>
+</blockquote>
+So this takes the very first argument, which if you'll recall, was the feeder_params, and uses that as an argument for another search method in the Feeder model. That method, finally, is the one from above, the fetch_and_parse method. (Yes, we could call this method just in the Post model, but we wanted to separate out the logic for different types of feeds.) And that's how we find the appropriate feed from a user search!<br>
+
+
+
